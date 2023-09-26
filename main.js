@@ -10,7 +10,8 @@ createApp( {
                mensaje: "Hola Bienvenidos",
                arrayPersonajes: [],
                nombreIngresado: "",
-               filtradosPorNombre: []
+               filtradosPorNombre: [],
+               generos: []
           }
      },
 
@@ -22,6 +23,7 @@ createApp( {
                console.log(data);
                this.arrayPersonajes = data.docs 
                console.log(this.arrayPersonajes)
+               this.generos = [...new Set(this.arrayPersonajes.map(personaje => personaje.Genero))]
           })
           .catch(error => console.error(error))
      },
