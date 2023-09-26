@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <meta charset="UTF-8">
+     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <style>
+          @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@400;600&family=Josefin+Sans:ital,wght@0,100;0,300;0,600;1,400;1,700&family=Lato:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap');
+     </style>
+     <link rel="stylesheet" href="style.css">
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+     <script src="https://cdn.tailwindcss.com"></script>
+     <title>The Simpsons</title>
+</head>
+
+<body>
+     <header class="flex justify-center items-center">
+          <h1 class="text-3xl font-bold italic text-purple-800 drop-shadow-lg text-7xl">The Simpsons</h1>
+     </header>
+
+     <main id="app" class="p-8">
+          {{filtrarPorInputText}}
+          <div id="contenedorCards" class=" flex flex-col items-center bg-amber-400 p-8 rounded-md">
+
+               <!-- Seccion para serch y botones -->
+               <div class="flex w-75" role="search">
+                    <input class="form-control me-2" v-model="nombreIngresado" type="search" aria-label="Search"
+                         placeholder="Buscar personaje por nombre">
+                    <button type="submit" class="flex w-full items-center justify-center rounded-md bg-purple-700 px-8 py-3 text-base font-medium text-white hover:bg-purple-900 focus:outline-none focus:ring-2 focus:ring-purple-700 focus:ring-offset-1 drop-shadow-md">Buscar Personaje</button>
+                    <h6 class="mx-2">Hay <span>0</span> personajes encontrados</h6>
+               </div>
+
+               <!-- Seccion para los checkbox -->
+               <div class="d-flex justify-content-center gap-5 w-25 mx-auto mt-3">
+
+               </div>
+
+               <!-- Contenedor de Cards de cada personaje -->
+               <div class="d-flex flex-wrap justify-content-center mt-3 gap-3">
+
+                    <!-- CARD DE CADA PERSONAJE -->
+                    <div v-if="filtradosPorNombre.length != 0" class="card bg-slate-200" style="width: 18rem;"
+                         v-for="personaje of filtradosPorNombre">
+                         <img v-show="personaje.Nombre != 'Jenda'" v-bind:src="personaje.Imagen"
+                              class="card-img-top p-3" alt="..." style="height: 10em; object-fit: contain">
+                         <div class="h-full flex flex-col justify-between bg-slate-200 p-3">
+                              <div class="">
+                                   <h5 class="font-bold text-slate-600 mb-2">{{personaje.Nombre}}</h5>
+                                   <p class="card-text mb-4 italic">{{personaje.Historia.slice(0,90) + "..."}}</p>
+                              </div>
+                              <a href="#" class="flex w-full items-center justify-center rounded-md bg-purple-700 px-8 py-3 text-base font-medium text-white hover:bg-purple-900 focus:outline-none focus:ring-2 focus:ring-purple-700 focus:ring-offset-1 drop-shadow-md">Más detalles...</a>
+                         </div>
+                    </div>
+
+                    <div v-else class="d-flex justify-content-center">
+                         <img class="w-50" src="./assets/problemas.jpg" alt="">
+                    </div>
+                    <!-- Pantalla Alternativa -->
+
+
+               </div>
+
+          </div>
+     </main>
+
+     <footer>
+
+     </footer>
+
+     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"
+          integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe"
+          crossorigin="anonymous"></script>
+     <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+     <script src="./main.js"></script>
+</body>
+
+</html>
