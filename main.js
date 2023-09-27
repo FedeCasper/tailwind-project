@@ -12,7 +12,8 @@ createApp( {
                generos: [],
                randomCharacterObject: {},
                arrayOfFour: [],
-               deadArray: []
+               deadArray: [],
+               estados: []
           }
      },
 
@@ -24,7 +25,10 @@ createApp( {
                console.log(data);
                this.arrayPersonajes = data.docs 
                console.log(this.arrayPersonajes)
-               this.generos = [...new Set(this.arrayPersonajes.map(personaje => personaje.Genero))]
+               const sexo = [...new Set(this.arrayPersonajes.map(personaje => personaje.Genero))]
+               console.log(sexo);
+               this.estados = [...new Set(this.arrayPersonajes.map(personaje => personaje.Estado))]
+               console.log(this.estados);
                this.randomCharacterObject = this.randomCharacter()
                console.log(this.randomCharacterObject);
                this.arrayOfFour = this.randomFourCharacter()
