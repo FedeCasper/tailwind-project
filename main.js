@@ -11,9 +11,11 @@ createApp( {
                filtradosPorNombre: [],
                generos: [],
                randomCharacterObject: {},
-               arrayOfFour: [],
+               arrayOfSix: [],
                deadArray: [],
-               estados: []
+               estados: [],
+               familia: [],
+               vistaCompleta: undefined
           }
      },
 
@@ -22,18 +24,14 @@ createApp( {
           fetch(url)
           .then(res => res.json())
           .then(data => {
-               console.log(data);
                this.arrayPersonajes = data.docs 
-               console.log(this.arrayPersonajes)
                const sexo = [...new Set(this.arrayPersonajes.map(personaje => personaje.Genero))]
-               console.log(sexo);
                this.estados = [...new Set(this.arrayPersonajes.map(personaje => personaje.Estado))]
-               console.log(this.estados);
                this.randomCharacterObject = this.randomCharacter()
-               console.log(this.randomCharacterObject);
-               this.arrayOfFour = this.randomFourCharacter()
+               this.arrayOfSix = this.randomSixCharacter()
                this.deadArray = this.deadCharacters()
-               console.log(this.deadArray);
+               this.soloSimpsons()
+               this.vistaCompleta = false
           })
           .catch(error => console.error(error))
      },
@@ -43,9 +41,9 @@ createApp( {
                let randomNumber = Math.round(Math.random()*650)
                return this.arrayPersonajes[randomNumber]
           },
-          randomFourCharacter(){
+          randomSixCharacter(){
                let auxiliarArray = []
-               for(let i = 1 ; i < 5 ; i++){
+               for(let i = 1 ; i < 9 ; i++){
                     let randomNumber = Math.round(Math.random()*650)
                     auxiliarArray.push(this.arrayPersonajes[randomNumber])
                }
@@ -62,9 +60,13 @@ createApp( {
                     } else {
                          auxiliarArray.push(deadArray[randomNumber + 1])
                     }
-
                }
                return auxiliarArray
+          },
+          soloSimpsons(){
+               let familia = ["Homero Simpson", "Marge Simpson", "Bart Simpson", "Lisa Simpson", "Maggie Simpson"]
+               this.familia = (this.arrayPersonajes.filter(personaje => personaje.Nombre.includes("Simpson"))).filter(personaje => familia.includes(personaje.Nombre))
+               console.log(this.familia);
           }
      }, 
 
