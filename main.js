@@ -15,7 +15,8 @@ createApp( {
                deadArray: [],
                estados: [],
                familia: [],
-               vistaCompleta: undefined
+               vistaCompleta: undefined,
+               checkedValue: []
           }
      },
 
@@ -32,6 +33,7 @@ createApp( {
                this.deadArray = this.deadCharacters()
                this.soloSimpsons()
                this.vistaCompleta = false
+               this.filtradosPorNombre = this.arrayPersonajes
           })
           .catch(error => console.error(error))
      },
@@ -72,8 +74,12 @@ createApp( {
 
      computed:{
           filtrarPorInputText(){
-               this.filtradosPorNombre = this.arrayPersonajes.filter(personajes => personajes.Nombre.includes(this.nombreIngresado))
-               console.log(this.filtradosPorNombre);
+               this.filtradosPorNombre = this.arrayPersonajes.filter(personaje => this.checkedValue.includes(personaje.Estado))
+               if(this.filtradosPorNombre.length){
+                    this.filtradosPorNombre = this.filtradosPorNombre.filter(personajes => personajes.Nombre.includes(this.nombreIngresado))
+                    console.log(this.filtradosPorNombre);
+               } 
+
           }
      }
 

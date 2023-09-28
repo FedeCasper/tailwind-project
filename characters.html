@@ -15,7 +15,7 @@
 
 <body>
      <header class="flex justify-center items-center">
-          <h1 class="text-3xl font-bold italic text-purple-800 drop-shadow-lg text-7xl">The Simpsons</h1>
+          <img class="h-3/4 drop-shadow-lg" src="./assets/theSimpsonsLogo.png" alt="">
      </header>
 
      <main id="app" class="p-8">
@@ -53,17 +53,17 @@
                <!-- Seccion para los checkbox -->
                <div class="flex flex-wrap gap-2 my-1">
                     <div v-for="estado of estados" class="flex w-1/2 w-fit">
-                         <input type="checkbox" :id="estado" class="peer hidden" :value="estado" />
+                         <input type="checkbox" :id="estado" class="peer hidden" :value="estado" v-model="checkedValue" />
                          <label :for="estado"
                               class="select-none cursor-pointer rounded-lg border-2 border-purple-700 text-sm
                                                   py-2 px-6 font-bold text-purple-700 transition-colors duration-200 ease-in-out peer-checked:bg-purple-700 peer-checked:text-amber-400 peer-checked:border-indigo-700 ">
                               {{estado}}</label>
                     </div>
+                    {{checkedValue}}
                </div>
 
-
-               <!-- Contenedor de Cards de cada personaje -->
-               <div v-if="vistaCompleta" class="flex flex-wrap justify-center mt-3 gap-5">
+               <!-- Section full-info cards -->
+               <section v-if="vistaCompleta" class="flex flex-wrap justify-center mt-3 gap-5">
 
                     <!-- CARD DE CADA PERSONAJE -->
                     <div v-for="personaje of filtradosPorNombre"
@@ -178,8 +178,9 @@
 
 
 
-               </div>
+               </section>
 
+               <!-- Section resume cards -->
                <section v-if="!vistaCompleta">
                     <div class="px-6 py-10">
                          <h1
@@ -191,10 +192,10 @@
                               magni quia error alias, adipisci rem similique, at omnis eligendi optio eos harum.
                          </p>
 
-                         <div class="grid grid-cols-1 gap-8 mt-8 xl:mt-16 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8">
+                         <div class="grid grid-cols-1 gap-8 mt-8 xl:mt-16 md:grid-cols-4 lg:grid-cols-6 ">
                               <div v-for="personaje of filtradosPorNombre"
-                                   class="flex flex-col items-center p-8 transition-colors duration-200 transform cursor-pointer group hover:bg-purple-600 rounded-xl">
-                                   <img class="w-32 h-32 rounded-full ring-4 ring-slate-600 group-hover:ring-gray-300 object-contain p-2"
+                                   class="flex flex-col group items-center p-8 transition-colors duration-200 transform cursor-pointer group hover:bg-purple-600 rounded-xl hover:drop-shadow-lg hover:bg-opacity-20">
+                                   <img class="w-32 h-32 rounded-full ring-4 ring-slate-600 group-hover:ring-0 object-contain p-2 transform transition-transform duration-500 ease-in-out group-hover:scale-150"
                                         :src="personaje.Imagen"
                                         alt="">
 
