@@ -27,6 +27,8 @@ createApp( {
           .then(data => {
                this.arrayPersonajes = data.docs 
                const sexo = [...new Set(this.arrayPersonajes.map(personaje => personaje.Genero))]
+               this.correctorApi()
+               console.log(this.arrayPersonajes);
                this.estados = [...new Set(this.arrayPersonajes.map(personaje => personaje.Estado))]
                this.randomCharacterObject = this.randomCharacter()
                this.arrayOfSix = this.randomSixCharacter()
@@ -34,11 +36,29 @@ createApp( {
                this.soloSimpsons()
                this.vistaCompleta = false
                this.filtradosPorNombre = this.arrayPersonajes
+
           })
           .catch(error => console.error(error))
      },
 
      methods:{
+          correctorApi(){
+               this.arrayPersonajes = this.arrayPersonajes.map(personaje => {
+                    if(personaje.Estado != "Vivo" && personaje.Estado != "Fallecido" && personaje.Estado != "Divino" && personaje.Estado != "Robot" && personaje.Estado != "Robots" && personaje.Estado != "Ficticio" && personaje.Estado != "Estatua"){
+                         personaje.Estado = "Vivo"
+                         return personaje
+                    }  else if (personaje.Estado == "Divino"){
+                         personaje.Estado = "Inmortal"
+                         return personaje
+                    } else if(personaje.Estado == "Robot" || personaje.Estado == "Robots" || personaje.Estado == "Estatua"){
+                         personaje.Estado = "No vivos"
+                         return personaje
+                    } else {
+                         return personaje
+                    }
+                    
+               })
+          }, 
           randomCharacter(){
                let randomNumber = Math.round(Math.random()*650)
                return this.arrayPersonajes[randomNumber]
