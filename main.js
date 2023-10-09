@@ -16,7 +16,8 @@ createApp( {
                estados: [],
                familia: [],
                vistaCompleta: undefined,
-               checkedValue: []
+               checkedValue: [],
+               showCanvas: undefined
           }
      },
 
@@ -34,6 +35,7 @@ createApp( {
                this.deadArray = this.deadCharacters()
                this.soloSimpsons()
                this.vistaCompleta = false
+               this.showCanvas = false
                this.filtradosPorNombre = this.arrayPersonajes
 
           })

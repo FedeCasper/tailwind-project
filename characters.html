@@ -44,6 +44,21 @@
                                    <span class="ml-3 text-gray-900 text-sm font-medium">Vista Completa</span>
                               </label>
                          </div>
+
+                         <button type="button"
+                                   class="flex w-50 items-center justify-center rounded-md bg-purple-700 px-8 my-1 text-base font-medium text-white hover:bg-purple-900 focus:outline-none focus:ring-2 focus:ring-purple-700 focus:ring-offset-1 drop-shadow-md"
+                                   @click="showCanvas = true" >
+                                   Mis Favoritos
+                         </button>
+
+                         <section :class=" showCanvas ? 
+                         ' transition-all ease-in-out duration-700 delay-150 bg-purple-200 opacity-90 fixed w-2/6 h-[100vh] top-0 right-0 z-50' :
+                         ' fixed absolute w-0 h-[100vh] bg-amber-400 top-0 right-100 z-50 invisible' ">
+
+                              <div class="font-black cursor-pointer text-xl absolute top-2 right-4"
+                                   @click="showCanvas = false">X</div>
+                                   Favoritos
+                         </section>
                     </div>
 
                     <div class="bg-purple-100 border-t border-b border-purple-500 text-purple-700 px-4 py-3 my-4"
@@ -82,7 +97,7 @@
                     <!-- CARD DE CADA PERSONAJE -->
                     <div class="grid grid-cols-1 gap-8 mt-8 xl:mt-16 md:grid-cols-4">
                          <div v-for="personaje of filtradosPorNombre"
-                         class="bg-slate-500/25 relative rounded-md mx-4 w-full max-w-sm p-6">
+                              class="bg-slate-500/25 relative rounded-md mx-4 w-full max-w-sm p-6">
                               <a href="#"
                                    class="relative inline-block w-full transform transition-transform duration-300 ease-in-out">
                                    <div class="rounded-lg">
@@ -100,10 +115,11 @@
                                                        class="flex space-x-5 overflow-hidden rounded-lg bg-white/70 px-4 py-1 shadow">
                                                        <p class="flex items-center font-medium text-gray-500">
                                                             <svg class="mr-2 h-5 w-5 fill-current"
-                                                                 xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
+                                                                 xmlns="http://www.w3.org/2000/svg"
+                                                                 viewBox="0 0 576 512">
                                                                  <path
-                                                                 d="M528 64H384v96H192V64H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h480c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48zM288 224c35.3 0 64 28.7 64 64s-28.7 64-64 64-64-28.7-64-64 28.7-64 64-64zm93.3 224H194.7c-10.4 0-18.8-10-15.6-19.8 8.3-25.6 32.4-44.2 60.9-44.2h8.2c12.3 5.1 25.7 8 39.8 8s27.6-2.9 39.8-8h8.2c28.4 0 52.5 18.5 60.9 44.2 3.2 9.8-5.2 19.8-15.6 19.8zM352 32c0-17.7-14.3-32-32-32h-64c-17.7 0-32 14.3-32 32v96h128V32z" />
-                                                            </path>
+                                                                      d="M528 64H384v96H192V64H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h480c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48zM288 224c35.3 0 64 28.7 64 64s-28.7 64-64 64-64-28.7-64-64 28.7-64 64-64zm93.3 224H194.7c-10.4 0-18.8-10-15.6-19.8 8.3-25.6 32.4-44.2 60.9-44.2h8.2c12.3 5.1 25.7 8 39.8 8s27.6-2.9 39.8-8h8.2c28.4 0 52.5 18.5 60.9 44.2 3.2 9.8-5.2 19.8-15.6 19.8zM352 32c0-17.7-14.3-32-32-32h-64c-17.7 0-32 14.3-32 32v96h128V32z" />
+                                                                 </path>
                                                             </svg>
                                                             {{personaje._id}}
                                                        </p>
@@ -134,7 +150,8 @@
 
                                              <div
                                                   class="mt-2 grid grid-cols-2 grid-rows-2 gap-4 border-b border-t border-purple-400 pb-3 pt-3">
-                                                  <p class="flex items-center text-gray-800 xl:flex-row xl:items-center">
+                                                  <p
+                                                       class="flex items-center text-gray-800 xl:flex-row xl:items-center">
                                                        <svg class="mr-3 inline-block h-5 w-5 fill-current text-gray-800 xl:h-4 xl:w-4"
                                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
                                                             <path
@@ -143,7 +160,8 @@
                                                        </svg>
                                                        <span class="xl:mt-0"> {{personaje.Estado}} </span>
                                                   </p>
-                                                  <p class="flex items-center text-gray-800 xl:flex-row xl:items-center">
+                                                  <p
+                                                       class="flex items-center text-gray-800 xl:flex-row xl:items-center">
                                                        <svg class="mr-3 inline-block h-5 w-5 fill-current text-gray-800 xl:h-4 xl:w-4"
                                                             viewBox="0 0 18 18" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
@@ -153,7 +171,8 @@
                                                        </svg>
                                                        <span class="mt-0"> {{personaje.Genero}} </span>
                                                   </p>
-                                                  <p class="flex items-center text-gray-800 xl:flex-row xl:items-center">
+                                                  <p
+                                                       class="flex items-center text-gray-800 xl:flex-row xl:items-center">
                                                        <svg class="mr-3 inline-block h-5 w-5 fill-current text-gray-800 xl:h-4 xl:w-4"
                                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
                                                             <path
@@ -162,7 +181,8 @@
                                                        </svg>
                                                        <span class="mt-0"> 1,386 sq. ft. </span>
                                                   </p>
-                                                  <p class="flex items-center text-gray-800 xl:flex-row xl:items-center">
+                                                  <p
+                                                       class="flex items-center text-gray-800 xl:flex-row xl:items-center">
                                                        <svg class="mr-3 inline-block h-5 w-5 fill-current text-gray-800 xl:h-4 xl:w-4"
                                                             xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512">
                                                             <path
