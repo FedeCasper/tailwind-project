@@ -28,7 +28,6 @@ createApp( {
                this.arrayPersonajes = data.docs 
                const sexo = [...new Set(this.arrayPersonajes.map(personaje => personaje.Genero))]
                this.correctorApi()
-               console.log(this.arrayPersonajes);
                this.estados = [...new Set(this.arrayPersonajes.map(personaje => personaje.Estado))]
                this.randomCharacterObject = this.randomCharacter()
                this.arrayOfSix = this.randomSixCharacter()
@@ -95,11 +94,9 @@ createApp( {
      computed:{
           filtrarPorInputText(){
                this.filtradosPorNombre = this.arrayPersonajes.filter(personaje => this.checkedValue.includes(personaje.Estado))
-               if(this.filtradosPorNombre.length){
-                    this.filtradosPorNombre = this.filtradosPorNombre.filter(personajes => personajes.Nombre.includes(this.nombreIngresado))
-                    console.log(this.filtradosPorNombre);
-               } 
-
+               this.filtradosPorNombre = this.filtradosPorNombre.length ?
+                    this.filtradosPorNombre.filter(personajes => personajes.Nombre.includes(this.nombreIngresado)) : 
+                    this.filtradosPorNombre = this.arrayPersonajes.filter(personajes => personajes.Nombre.toLowerCase().includes(this.nombreIngresado.toLowerCase()))
           }
      }
 
