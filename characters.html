@@ -22,110 +22,100 @@
           {{filtrarPorInputText}}
           <div id="contenedorCards" class="flex flex-col items-center p-4 rounded-md">
 
-               <!-- Seccion para search, toogle, favoritos y div offcanvas -->
-               <div class="flex flex-col w-full" role="search">
+               <!-- Seccion(2): Contenedor - Banner encontrados  -->
+               <section class="flex flex-col w-full" role="search">
 
-                    <!-- Search seccion -->
+                    <!-- CONTENEDOR: Search, Switch & Botón Off Canvas -->
                     <div class="flex flex-col gap-2 sm:flex-row w-full justify-between">
+
+                         <!-- Search -->
                          <div class="flex">
                               <input class="rounded-md w-full me-2 my-1 px-2" v-model="nombreIngresado" type="search"
                                    aria-label="Search" placeholder="Buscar personaje por nombre" />
                               <button type="submit"
-                                   class="flex w-1/3 items-center justify-center rounded-md bg-purple-700 px-8 my-1 text-base font-medium text-white hover:bg-purple-900 focus:outline-none focus:ring-2 focus:ring-purple-700 focus:ring-offset-1 drop-shadow-md">
-                                   Buscar Personaje
+                                   class="flex w-1/3 items-center justify-center rounded-md bg-amber-400 px-8 my-1 text-base font-medium text-gray-600 hover:bg-purple-900 focus:outline-none focus:ring-2 focus:ring-purple-700 focus:ring-offset-1 drop-shadow-md">
+                                   Buscar
                               </button>
                          </div>
 
-                         <!-- Switch para cambiar la vista -->
-                         <div class="flex flex-col items-center bg-amber-400 p-2 rounded-md">
-                              <label for="toggle-example" class="flex items-center cursor-pointer relative">
-                                   <input type="checkbox" id="toggle-example" class="sr-only" :value="vistaCompleta"
-                                        @change="vistaCompleta? vistaCompleta = false : vistaCompleta = true" />
-                                   <div
-                                        class="toggle-bg bg-purple-200 border-2 border-purple-200 h-6 w-11 rounded-full">
-                                   </div>
-                                   <span class="ml-3 text-gray-900 text-sm font-medium">Vista Completa</span>
-                              </label>
-                         </div>
-
-                         <!-- Botón de favoritos -->
-                         <button type="button"
-                              class="flex w-50 items-center justify-center rounded-md bg-purple-700 p-2 my-1 text-base font-medium text-white hover:bg-purple-900 focus:outline-none focus:ring-2 focus:ring-purple-700 focus:ring-offset-1 drop-shadow-md"
-                              @click="showCanvas = true">
-                              Mis Favoritos
-                         </button>
-
-                         <div class="flex gap-8 items-center">
-                              <!-- Div modal para favoritos -->
-                              <section
-                                   :class=" showCanvas ? 
-                              ' transition-all ease-in-out duration-700 delay-150 bg-purple-200 fixed top-0 right-0 w-5/6 md:w-2/6 h-[100vh] z-50 opacity-95 px-4 overflow-y-scroll' :
-                              ' transition-all ease-in-out duration-700 delay-150 bg-purple-200 fixed top-0 right-0 w-0 h-[100vh] z-50 opacity-0 invisible' ">
-                                   <!-- Cruz para cerrar modal -->
-                                   <div class="font-black cursor-pointer text-xl absolute top-2 right-4"
-                                        @click="showCanvas = false">X</div>
-                                   <div
-                                        class="flex items-start justify-between p-5 border-b rounded-t dark:border-gray-600">
-                                        <h3 class="text-gray-900 text-xl lg:text-2xl font-semibold">
-                                             Mis Favoritos
-                                        </h3>
-                                   </div>
-
-                                   <!-- Div contenedor de cards favoritos -->
-                                   <div class="grid grid-cols-1 sm:grid-cols-2  gap-2 pt-10">
-                                        <div v-for="personaje of favoritos"
-                                             class="relative flex flex-col items-center rounded-[20px] w-full mx-auto p-4 bg-white bg-clip-border shadow-3xl shadow-shadow-500 dark:!bg-navy-800 dark:text-white dark:!shadow-none">
-                                             <div class="relative flex h-32 w-full justify-center rounded-xl bg-cover">
-                                                  <img src='https://horizon-tailwind-react-git-tailwind-components-horizon-ui.vercel.app/static/media/banner.ef572d78f29b0fee0a09.png'
-                                                       class="absolute flex h-32 w-full justify-center rounded-xl bg-cover"
-                                                       alt="">
-                                                  <div
-                                                       class="absolute -bottom-12 flex h-[87px] w-[87px] items-center justify-center rounded-full border-[4px] border-white bg-pink-400 dark:!border-navy-700">
-                                                       <img class="h-full w-full object-contain rounded-full p-2"
-                                                            :src='personaje.Imagen' alt="" />
-                                                  </div>
-                                             </div>
-                                             <div class="mt-12 flex flex-col items-center">
-                                                  <h4 class="text-xl font-bold text-purple-700">
-                                                       {{personaje.Nombre}}
-                                                  </h4>
-                                                  <p class="text-base font-normal text-center text-gray-600">
-                                                       {{personaje.Estado}}</p>
-                                             </div>
-                                             <div class="mt-3 mb-3 flex gap-14 md:!gap-4">
-                                                  <div class="flex flex-col items-center justify-center">
-                                                       <p class="text-2xl font-bold text-slate-700 ">17</p>
-                                                       <p class="text-sm font-normal text-gray-600">Posts</p>
-                                                  </div>
-                                                  <div class="flex flex-col items-center justify-center">
-                                                       <p class="text-2xl font-bold text-slate-700 ">
-                                                            9.7K
-                                                       </p>
-                                                       <p class="text-sm font-normal text-gray-600">Followers</p>
-                                                  </div>
-                                                  <div class="flex flex-col items-center justify-center">
-                                                       <p class="text-2xl font-bold text-slate-700 ">
-                                                            434
-                                                       </p>
-                                                       <p class="text-sm font-normal text-gray-600">Following</p>
-                                                  </div>
-                                             </div>
+                         <!-- CONTENEDOR: Switch & Botón Off Canvas -->
+                         <div class="flex flex-col justify-between gap-2 sm:flex-row">
+                              <!-- Switch -->
+                              <div class="flex flex-col  items-center justify-center bg-amber-400 p-3 rounded-md my-1">
+                                   <label for="toggle-example" class="flex items-center cursor-pointer relative">
+                                        <input type="checkbox" id="toggle-example" class="sr-only"
+                                             :value="vistaCompleta"
+                                             @change="vistaCompleta? vistaCompleta = false : vistaCompleta = true" />
+                                        <div
+                                             class="toggle-bg bg-purple-200 border-2 border-purple-200 h-6 w-11 rounded-full">
                                         </div>
-                                   </div>
-
-                              </section>
+                                        <span class="ml-3 text-gray-600 text-sm font-medium">Vista Completa</span>
+                                   </label>
+                              </div>
+                              <!-- Botón Off Canvas -->
+                              <button type="button"
+                                   class="flex w-50 items-center justify-center rounded-md bg-amber-400 p-3 text-base my-1 font-medium text-gray-600 hover:bg-purple-900 focus:outline-none focus:ring-2 focus:ring-purple-700 focus:ring-offset-1 drop-shadow-md"
+                                   @click="showCanvas = true">
+                                   Mis Favoritos
+                              </button>
                          </div>
 
                     </div>
 
+                    <!-- Banner encontrados -->
                     <div class="bg-purple-100 border-t border-b border-purple-500 text-purple-700 px-4 py-3 my-4"
                          role="alert">
-                         <p class="font-bold">{{arrayPersonajes.length + " personajes"}}</p>
                          <p class="text-sm">
                               Se han encontrado {{filtradosPorNombre.length}} coincidencias
                          </p>
                     </div>
-               </div>
+
+               </section>
+
+               <!-- Off Canvas -->
+               <section
+                    :class=" showCanvas ? 
+                    ' transition-all ease-in-out duration-700 delay-150 bg-purple-200 fixed top-0 right-0 w-5/6 md:w-2/6 h-[100vh] z-50 opacity-95 px-4 overflow-y-scroll' :
+                    ' transition-all ease-in-out duration-700 delay-150 bg-purple-200 fixed top-0 right-0 w-0 h-[100vh] z-50 opacity-0 invisible' 
+                    ">
+
+                    <!-- Cabecera Off Canvas -->
+                    <div class="flex items-start justify-between p-5 border-b rounded-t border-purple-600/50">
+                         <h3 class="text-gray-900 text-xl lg:text-2xl font-semibold">
+                              Mis Favoritos
+                         </h3>
+                         <div class="font-black cursor-pointer text-xl absolute top-6 right-4"
+                         @click="showCanvas = false">X</div>
+                    </div>
+
+                    <!-- CONTENEDOR: Cards Favoritas -->
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-10">
+                         <div v-for="personaje of favoritos"
+                              class="relative flex flex-col items-center rounded-[20px] w-full mx-auto p-4 bg-white bg-clip-border drop-shadow-lg dark:!bg-navy-800 dark:text-white dark:!shadow-none">
+                              <div class="relative flex h-32 w-full justify-center rounded-xl bg-cover">
+                                   <img src='https://horizon-tailwind-react-git-tailwind-components-horizon-ui.vercel.app/static/media/banner.ef572d78f29b0fee0a09.png'
+                                        class="absolute flex h-24 w-full justify-center rounded-xl bg-cover"
+                                        alt="">
+                                   <div
+                                        class="absolute -bottom-12 flex h-[87px] w-[87px] items-center justify-center rounded-full border-[4px] border-white bg-pink-400 dark:!border-navy-700">
+                                        <img class="h-full w-full object-contain rounded-full p-2"
+                                             :src='personaje.Imagen' alt="" />
+                                   </div>
+                              </div>
+                              <div class="mt-12 flex flex-col items-center">
+                                   <h4 class="text-xl font-bold text-purple-700">
+                                        {{personaje.Nombre}}
+                                   </h4>
+                                   <p class="text-base font-normal text-center text-gray-600">
+                                        {{personaje.Estado}}</p>
+                              </div>
+                         </div>
+                    </div>
+
+               </section>
+
+
+
 
                <!-- Seccion para los checkbox -->
                <div class="flex flex-wrap gap-2 my-1">
