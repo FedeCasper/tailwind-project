@@ -22,7 +22,7 @@
           {{filtrarPorInputText}}
           <div id="contenedorCards" class="flex flex-col items-center p-4 rounded-md">
 
-               <!-- Seccion para serch y botones -->
+               <!-- Seccion para search, toogle, favoritos y div offcanvas -->
                <div class="flex flex-col w-full" role="search">
                     <div class="flex w-full justify-between">
                          <div class="flex">
@@ -34,31 +34,83 @@
                               </button>
                          </div>
 
-                         <!-- Switch para cambiar la vista -->
-                         <div class="flex flex-col justify-center">
-                              <label for="toggle-example" class="flex items-center cursor-pointer relative mb-4">
-                                   <input type="checkbox" id="toggle-example" class="sr-only" :value="vistaCompleta"
-                                        @change="vistaCompleta? vistaCompleta = false : vistaCompleta = true" />
-                                   <div class="toggle-bg bg-gray-200 border-2 border-gray-200 h-6 w-11 rounded-full">
+
+                         <div class="flex gap-8 items-center">
+                              <!-- Switch para cambiar la vista -->
+                              <div class="flex flex-col justify-center bg-amber-400 p-2 rounded-md">
+                                   <label for="toggle-example" class="flex items-center cursor-pointer relative">
+                                        <input type="checkbox" id="toggle-example" class="sr-only"
+                                             :value="vistaCompleta"
+                                             @change="vistaCompleta? vistaCompleta = false : vistaCompleta = true" />
+                                        <div
+                                             class="toggle-bg bg-purple-200 border-2 border-purple-200 h-6 w-11 rounded-full">
+                                        </div>
+                                        <span class="ml-3 text-gray-900 text-sm font-medium">Vista Completa</span>
+                                   </label>
+                              </div>
+
+                              <!-- Botón de favoritos -->
+                              <button type="button"
+                                   class="flex w-50 items-center justify-center rounded-md bg-purple-700 p-2 my-1 text-base font-medium text-white hover:bg-purple-900 focus:outline-none focus:ring-2 focus:ring-purple-700 focus:ring-offset-1 drop-shadow-md"
+                                   @click="showCanvas = true">
+                                   Mis Favoritos
+                              </button>
+
+                              <!-- Div modal para favoritos -->
+                              <section
+                                   :class=" showCanvas ? 
+                              ' transition-all ease-in-out duration-700 delay-150 bg-purple-200 fixed top-0 right-0 w-2/6 h-[100vh] z-50 opacity-95 px-4 overflow-y-scroll' :
+                              ' transition-all ease-in-out duration-700 delay-150 bg-purple-200 fixed top-0 right-0 w-0 h-[100vh] z-50 opacity-0 invisible' ">
+
+                                   <!-- Cruz para cerrar modal -->
+                                   <div class="font-black cursor-pointer text-xl absolute top-2 right-4" @click="showCanvas = false">X</div>
+                                   Mis Favoritos
+
+                                   <!-- Div contenedor de cards favoritos -->
+                                   <div class="grid grid-cols-2 gap-2 pt-10">
+                                        <div 
+                                        v-for="personaje of favoritos"
+                                        class="relative flex flex-col items-center rounded-[20px] w-full mx-auto p-4 bg-white bg-clip-border shadow-3xl shadow-shadow-500 dark:!bg-navy-800 dark:text-white dark:!shadow-none">
+                                             <div class="relative flex h-32 w-full justify-center rounded-xl bg-cover">
+                                                  <img src='https://horizon-tailwind-react-git-tailwind-components-horizon-ui.vercel.app/static/media/banner.ef572d78f29b0fee0a09.png'
+                                                       class="absolute flex h-32 w-full justify-center rounded-xl bg-cover">
+                                                  <div
+                                                       class="absolute -bottom-12 flex h-[87px] w-[87px] items-center justify-center rounded-full border-[4px] border-white bg-pink-400 dark:!border-navy-700">
+                                                       <img class="h-full w-full object-contain rounded-full p-2"
+                                                            :src='personaje.Imagen'
+                                                            alt="" />
+                                                  </div>
+                                             </div>
+                                             <div class="mt-16 flex flex-col items-center">
+                                                  <h4 class="text-xl font-bold text-purple-700">
+                                                       {{personaje.Nombre}}
+                                                  </h4>
+                                                  <p class="text-base font-normal text-center text-gray-600">{{personaje.Estado}}</p>
+                                             </div>
+                                             <div class="mt-6 mb-3 flex gap-14 md:!gap-4">
+                                                  <div class="flex flex-col items-center justify-center">
+                                                       <p class="text-2xl font-bold text-navy-700 dark:text-white">17</p>
+                                                       <p class="text-sm font-normal text-gray-600">Posts</p>
+                                                  </div>
+                                                  <div class="flex flex-col items-center justify-center">
+                                                       <p class="text-2xl font-bold text-navy-700 dark:text-white">
+                                                            9.7K
+                                                       </p>
+                                                       <p class="text-sm font-normal text-gray-600">Followers</p>
+                                                  </div>
+                                                  <div class="flex flex-col items-center justify-center">
+                                                       <p class="text-2xl font-bold text-navy-700 dark:text-white">
+                                                            434
+                                                       </p>
+                                                       <p class="text-sm font-normal text-gray-600">Following</p>
+                                                  </div>
+                                             </div>
+                                        </div>
                                    </div>
-                                   <span class="ml-3 text-gray-900 text-sm font-medium">Vista Completa</span>
-                              </label>
+
+                              </section>
                          </div>
 
-                         <button type="button"
-                                   class="flex w-50 items-center justify-center rounded-md bg-purple-700 px-8 my-1 text-base font-medium text-white hover:bg-purple-900 focus:outline-none focus:ring-2 focus:ring-purple-700 focus:ring-offset-1 drop-shadow-md"
-                                   @click="showCanvas = true" >
-                                   Mis Favoritos
-                         </button>
-
-                         <section :class=" showCanvas ? 
-                         ' transition-all ease-in-out duration-700 delay-150 bg-purple-200 opacity-90 fixed w-2/6 h-[100vh] top-0 right-0 z-50' :
-                         ' fixed absolute w-0 h-[100vh] bg-amber-400 top-0 right-100 z-50 invisible' ">
-
-                              <div class="font-black cursor-pointer text-xl absolute top-2 right-4"
-                                   @click="showCanvas = false">X</div>
-                                   Favoritos
-                         </section>
                     </div>
 
                     <div class="bg-purple-100 border-t border-b border-purple-500 text-purple-700 px-4 py-3 my-4"
@@ -97,7 +149,7 @@
                     <!-- CARD DE CADA PERSONAJE -->
                     <div class="grid grid-cols-1 gap-8 mt-8 xl:mt-16 md:grid-cols-4">
                          <div v-for="personaje of filtradosPorNombre"
-                              class="bg-slate-500/25 relative rounded-md mx-4 w-full max-w-sm p-6">
+                              class="bg-slate-500/25 relative rounded-md mx-4 w-full max-w-sm p-6 hover:bg-amber-400">
                               <a href="#"
                                    class="relative inline-block w-full transform transition-transform duration-300 ease-in-out">
                                    <div class="rounded-lg">
@@ -110,10 +162,17 @@
                                                   class="absolute right-0 top-0 z-10 ml-3 mt-3 inline-flex select-none rounded-lg bg-purple-700 px-3 py-2 text-sm font-medium text-white">
                                                   {{personaje.Estado}}
                                              </span>
+
                                              <div class="absolute bottom-0 mb-3 flex justify-center">
-                                                  <div
-                                                       class="flex space-x-5 overflow-hidden rounded-lg bg-white/70 px-4 py-1 shadow">
-                                                       <p class="flex items-center font-medium text-gray-500">
+                                                  <div :class="favoritos.some( character => character._id === personaje._id) ? 
+                                                       'flex space-x-5 overflow-hidden rounded-lg bg-purple-500/[.80] px-4 py-1 shadow' :
+                                                       'flex space-x-5 overflow-hidden rounded-lg bg-white/50 px-4 py-1 shadow'
+                                                       "
+                                                       @click="toogleFavoritos(personaje._id)">
+                                                       <p :class=" favoritos.some( character => character._id === personaje._id) ?
+                                                            'flex items-center font-medium text-slate-300' :
+                                                            'flex items-center font-medium text-gray-500'
+                                                            ">
                                                             <svg class="mr-2 h-5 w-5 fill-current"
                                                                  xmlns="http://www.w3.org/2000/svg"
                                                                  viewBox="0 0 576 512">
@@ -121,9 +180,8 @@
                                                                       d="M528 64H384v96H192V64H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h480c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48zM288 224c35.3 0 64 28.7 64 64s-28.7 64-64 64-64-28.7-64-64 28.7-64 64-64zm93.3 224H194.7c-10.4 0-18.8-10-15.6-19.8 8.3-25.6 32.4-44.2 60.9-44.2h8.2c12.3 5.1 25.7 8 39.8 8s27.6-2.9 39.8-8h8.2c28.4 0 52.5 18.5 60.9 44.2 3.2 9.8-5.2 19.8-15.6 19.8zM352 32c0-17.7-14.3-32-32-32h-64c-17.7 0-32 14.3-32 32v96h128V32z" />
                                                                  </path>
                                                             </svg>
-                                                            {{personaje._id}}
+                                                            {{favoritos.some( character => character._id === personaje._id) ? 'En favoritos' : 'Agregar a favoritos' }}
                                                        </p>
-
                                                   </div>
                                              </div>
                                         </div>

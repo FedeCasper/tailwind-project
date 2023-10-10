@@ -17,7 +17,8 @@ createApp( {
                familia: [],
                vistaCompleta: undefined,
                checkedValue: [],
-               showCanvas: undefined
+               showCanvas: undefined,
+               favoritos: []
           }
      },
 
@@ -37,6 +38,7 @@ createApp( {
                this.vistaCompleta = false
                this.showCanvas = false
                this.filtradosPorNombre = this.arrayPersonajes
+               this.favoritos = this.getLocalStorage() ?? []
 
           })
           .catch(error => console.error(error))
@@ -90,6 +92,24 @@ createApp( {
                let familia = ["Homero Simpson", "Marge Simpson", "Bart Simpson", "Lisa Simpson", "Maggie Simpson"]
                this.familia = (this.arrayPersonajes.filter(personaje => personaje.Nombre.includes("Simpson"))).filter(personaje => familia.includes(personaje.Nombre))
                console.log(this.familia);
+          },
+          toogleFavoritos(id){
+               console.log(id);
+               if(this.favoritos.find(personaje => personaje._id === id)){
+                    this.favoritos = this.favoritos.filter( personaje => personaje._id != id)
+                    console.log("Quita ", this.favoritos);
+               } else {
+                    let personajeEscogido = this.arrayPersonajes.find( personaje => personaje._id === id)
+                    this.favoritos.push(personajeEscogido)
+                    console.log("Agrega ", this.favoritos);
+               }
+               let favoritosTextoPlano = JSON.stringify(this.favoritos)
+               console.log(favoritosTextoPlano);
+               localStorage.setItem('favoritos', favoritosTextoPlano)
+          },
+          getLocalStorage(){
+               let favoritosTraidosLocalStorage = localStorage.getItem('favoritos')
+               return JSON.parse(favoritosTraidosLocalStorage)
           }
      }, 
 
