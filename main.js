@@ -28,6 +28,7 @@ createApp( {
           .then(res => res.json())
           .then(data => {
                this.arrayPersonajes = data.docs 
+               console.log(this.arrayPersonajes);
                const sexo = [...new Set(this.arrayPersonajes.map(personaje => personaje.Genero))]
                this.correctorApi()
                this.estados = [...new Set(this.arrayPersonajes.map(personaje => personaje.Estado))]
@@ -55,6 +56,11 @@ createApp( {
                          return personaje
                     } else if(personaje.Estado == "Robot" || personaje.Estado == "Robots" || personaje.Estado == "Estatua"){
                          personaje.Estado = "No vivos"
+                         return personaje
+                    } else if(personaje.Nombre.includes("Spiro")) {
+                         console.log(this.arrayPersonajes.indexOf(personaje));
+                         personaje.Historia = "Es el propietario griego de Spiro's."
+                         personaje.Nombre = "Spiro"
                          return personaje
                     } else {
                          return personaje
