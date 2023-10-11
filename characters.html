@@ -63,8 +63,17 @@
                     </div>
 
                     <!-- Banner encontrados -->
-                    <div class="bg-purple-100 border-t border-b border-purple-500 text-purple-700 px-4 py-3 my-4"
+                    <div class="flex flex-col gap-2 justify-center sm:flex-row sm:justify-between sm:items-center bg-purple-100 border-t border-b border-purple-500 text-purple-700 px-4 py-3 my-4"
                          role="alert">
+                         <div class="flex justify-center flex-wrap gap-2 my-1">
+                              <div v-for="estado of estados" class="flex w-1/2 w-fit">
+                                   <input type="checkbox" :id="estado" class="peer hidden" :value="estado"
+                                        v-model="checkedValue" />
+                                   <label :for="estado"
+                                        class="select-none cursor-pointer rounded-lg border-2 border-purple-700 text-sm py-1 px-2 font-bold text-purple-700 transition-colors duration-200 ease-in-out peer-checked:bg-purple-700 peer-checked:text-amber-400 peer-checked:border-indigo-700">
+                                        {{estado}}</label>
+                              </div>
+                         </div>
                          <p class="text-sm">
                               Se han encontrado {{filtradosPorNombre.length}} coincidencias
                          </p>
@@ -75,7 +84,7 @@
                <!-- Off Canvas -->
                <section
                     :class=" showCanvas ? 
-                    ' transition-all ease-in-out duration-700 delay-150 bg-purple-200 fixed top-0 right-0 w-5/6 md:w-2/6 h-[100vh] z-50 opacity-95 px-4 overflow-y-scroll' :
+                    ' transition-all ease-in-out duration-700 delay-150 bg-purple-200 fixed top-0 right-0 w-5/6 md:w-2/6 h-[100vh] z-50 opacity-95 px-4 overflow-auto' :
                     ' transition-all ease-in-out duration-700 delay-150 bg-purple-200 fixed top-0 right-0 w-0 h-[100vh] z-50 opacity-0 invisible' 
                     ">
 
@@ -114,11 +123,8 @@
 
                </section>
 
-
-
-
                <!-- Seccion para los checkbox -->
-               <div class="flex flex-wrap gap-2 my-1">
+               <!-- <div class="flex flex-wrap gap-2 my-1">
                     <div v-for="estado of estados" class="flex w-1/2 w-fit">
                          <input type="checkbox" :id="estado" class="peer hidden" :value="estado"
                               v-model="checkedValue" />
@@ -126,7 +132,7 @@
                               class="select-none cursor-pointer rounded-lg border-2 border-purple-700 text-sm py-1 px-6 font-bold text-purple-700 transition-colors duration-200 ease-in-out peer-checked:bg-purple-700 peer-checked:text-amber-400 peer-checked:border-indigo-700">
                               {{estado}}</label>
                     </div>
-               </div>
+               </div> -->
 
                <!-- Section full-info cards -->
                <section v-if="vistaCompleta" class="flex flex-col flex-wrap items-center mt-3 gap-5">
