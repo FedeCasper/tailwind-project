@@ -63,6 +63,7 @@ createApp( {
                          personaje.Nombre = "Spiro"
                          return personaje
                     } else {
+                         personaje.Nombre.trim()
                          return personaje
                     }
                     
