@@ -39,7 +39,7 @@ createApp( {
                console.log(w);
 
                this.personaje = this.arrayPersonajes.find(personaje => personaje._id == w)
-               console.log(personaje);
+               console.log(this.personaje);
           })
           .catch(error => console.error(error))
      },
