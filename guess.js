@@ -20,7 +20,8 @@ createApp( {
                favoritos: [],
                secretCharacter: {},
                letraIngresada: "",
-               letraEncontrada: ""
+               letraEncontrada: "",
+               arrayIngresadas: []
           }
      },
 
@@ -44,7 +45,7 @@ createApp( {
                this.favoritos = this.getLocalStorage() ?? []
 
                this.secretCharacter = this.randomCharacter()
-               console.log(this.secretCharacter);
+               console.log(this.secretCharacter.Nombre);
 
           })
           .catch(error => console.error(error))
@@ -121,6 +122,17 @@ createApp( {
           getLocalStorage(){
                let favoritosTraidosLocalStorage = localStorage.getItem('favoritos')
                return JSON.parse(favoritosTraidosLocalStorage)
+          },
+          checkLetter(){
+               let strike = 0
+               for(let letra of this.secretCharacter.Nombre){
+                    if(letra == this.letraIngresada){
+                         this.arrayIngresadas.push(this.letraIngresada)
+                    }
+               } 
+               strike++
+               console.log(strike);
+               console.log(this.arrayIngresadas);
           }
      }, 
 
@@ -130,16 +142,6 @@ createApp( {
                this.filtradosPorNombre = this.filtradosPorNombre.length ?
                     this.filtradosPorNombre.filter(personajes => personajes.Nombre.includes(this.nombreIngresado)) : 
                     this.filtradosPorNombre = this.arrayPersonajes.filter(personajes => personajes.Nombre.toLowerCase().includes(this.nombreIngresado.toLowerCase()))
-          },
-          checkLetter(){
-               for(letra of this.secretCharacter.Nombre){
-                    if(letra == this.letraIngresada){
-                         console.log("acertaste " + letra);
-                         this.letraEncontrada = letra
-                    }else{
-                         console.log("No adivinaste");
-                    }
-               }
           }
      }
 

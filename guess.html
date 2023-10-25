@@ -65,16 +65,16 @@
       </div>
    </nav>
    <div id="app">
-      {{checkLetter}}
       <!-- Welcome Section -->
 
       <section class="flex gap-4">
+         {{secretCharacter.Nombre}}
          <label v-for="letra of secretCharacter.Nombre">
-            <div v-show="letra == letraEncontrada" class="w-8 h-8 border border-red-600 p-1" >{{letra}}</div>
+            <div v-show="arrayIngresadas.includes(letra)" class="w-8 h-8 border border-red-600 p-1" >{{letra}}</div>
          </label>
          <input type="text" name="" id=""  maxlength="1" v-model="letraIngresada">
-         {{letraIngresada}}
-         {{letraEncontrada}}
+         <button type="submit" @click="checkLetter">Submit</button>
+
       </section>
 
 
@@ -155,7 +155,7 @@
                <div class=" lg:flex lg:items-center lg:w-1/2 lg:justify-center">
                   <img
                      class="w-[12rem] h-[12rem] mt-10 lg:w-[28rem] lg:h-[28rem] object-contain xl:w-[34rem] xl:h-[34rem] rounded-full bg-gradient-to-r bg-purple-300 p-4 shadow-xl"
-                     src="personaje.Imagen" alt="">
+                     src="" alt="">
                </div>
             </div>
 
